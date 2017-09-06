@@ -23,8 +23,8 @@ var companySalesData = [
 ];
 
 
-
 function calculateSalesTax(salesData, taxRates) {
+  repeatedCompanies = [];
     for (let i = 0; i < salesData.length; i++)
   {
     let totalSales = 0;
@@ -33,12 +33,11 @@ function calculateSalesTax(salesData, taxRates) {
       totalSales += salesData[i].sales[j];
     }
     let province = salesData[i].province;
-    console.log(province);
     let totalTaxes = taxRates[province]*totalSales;
-    console.log(taxRates[province]);
-    console.log("Sales: :", totalSales, ", and Taxes: ", totalTaxes);
-
+    //console.log("Sales: :", totalSales, ", and Taxes: ", totalTaxes);
+    repeatedCompanies.push({name: salesData[i].name, totalSales, totalTaxes})
   }
+  console.log(repeatedCompanies);
 
 }
 
