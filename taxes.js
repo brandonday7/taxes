@@ -51,7 +51,7 @@ function calculateSalesTax(salesData, taxRates) {
         finalSalesData[l].totalTaxes += repeatedCompanies[k].totalTaxes;
         break;
       }
-      else
+      else if (l == finalSalesData.length - 1)
       {
         finalSalesData.push(repeatedCompanies[k]);
         break;
