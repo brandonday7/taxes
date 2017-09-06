@@ -38,6 +38,29 @@ function calculateSalesTax(salesData, taxRates) {
     repeatedCompanies.push({name: salesData[i].name, totalSales, totalTaxes})
   }
   console.log(repeatedCompanies);
+  let finalSalesData = [repeatedCompanies[0]];
+  //console.log(finalSalesData[0]);
+  for (let k = 1; k < repeatedCompanies.length; k++)
+  {
+    for (let l = 0; l < finalSalesData.length; l++)
+    {
+      if (repeatedCompanies[k].name === finalSalesData[l].name)
+      {
+
+        finalSalesData[l].totalSales += repeatedCompanies[k].totalSales;
+        finalSalesData[l].totalTaxes += repeatedCompanies[k].totalTaxes;
+        break;
+      }
+      else
+      {
+        finalSalesData.push(repeatedCompanies[k]);
+        break;
+      }
+    }
+
+  }
+
+  console.log(finalSalesData);
 
 }
 
