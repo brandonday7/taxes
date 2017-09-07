@@ -24,47 +24,39 @@ var companySalesData = [
 
 
 function calculateSalesTax(salesData, taxRates) {
-  repeatedCompanies = [];
-    for (let i = 0; i < salesData.length; i++)
-  {
-    let totalSales = 0;
-    for (let j = 0; j < salesData[i].sales.length; j++)
-    {
-      totalSales += salesData[i].sales[j];
-    }
-    let province = salesData[i].province;
-    let totalTaxes = taxRates[province]*totalSales;
-    //console.log("Sales: :", totalSales, ", and Taxes: ", totalTaxes);
-    repeatedCompanies.push({name: salesData[i].name, totalSales, totalTaxes})
-  }
-  console.log(repeatedCompanies);
-  let finalSalesData = [repeatedCompanies[0]];
-  //console.log(finalSalesData[0]);
-  for (let k = 1; k < repeatedCompanies.length; k++)
-  {
-    for (let l = 0; l < finalSalesData.length; l++)
-    {
-      if (repeatedCompanies[k].name === finalSalesData[l].name)
+  let finalSalesData = {};
+    for (let i = 0; i < salesData.length; i++) {
+      let totalSales = 0;
+      for (let j = 0; j < salesData[i].sales.length; j++)
       {
-
-        finalSalesData[l].totalSales += repeatedCompanies[k].totalSales;
-        finalSalesData[l].totalTaxes += repeatedCompanies[k].totalTaxes;
-        break;
+        totalSales += salesData[i].sales[j];
       }
-      else if (l == finalSalesData.length - 1)
+      let province = salesData[i].province;
+      let totalTaxes = taxRates[province]*totalSales;
+      // console.log("Sales: :", totalSales, ", and Taxes: ", totalTaxes);
+
+      let currentCompanyName = salesData[i].name;
+      // console.log(currentCompanyName);
+      // console.log(finalSalesData)
+
+      currentData = {totalSales, totalTaxes};
+
+      if (!finalSalesData[currentCompanyName])
       {
-        finalSalesData.push(repeatedCompanies[k]);
-        break;
+        finalSalesData[currentCompanyName] = currentData;
+      }
+
+      else
+      {
+        finalSalesData[currentCompanyName].totalSales += totalSales;
+        finalSalesData[currentCompanyName].totalTaxes += totalTaxes;
       }
     }
-
-  }
-
-  console.log(finalSalesData);
-
+    return finalSalesData;
 }
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
+console.log(results);
 
 // take in sales data
 // for the data in the array (normal for loop)
